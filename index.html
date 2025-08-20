@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="shortcut icon"
+      href="./images/favicon-32x32.png"
+      type="image/x-icon"
+    />
+    <title>interactive-rating-component</title>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Rating Card -->
+      <div class="card rating-card">
+        <div class="star">
+          <img src="./images/icon-star.svg" alt="star" />
+        </div>
+        <div class="text">
+          <div class="title"><h1>How did we do?</h1></div>
+          <div class="paragraph">
+            <p>
+              Please let us know how we did with your support request. All
+              feedback is appreciated to help us improve our offering!
+            </p>
+          </div>
+        </div>
+        <div class="rating-btn">
+          <button class="rating">1</button>
+          <button class="rating">2</button>
+          <button class="rating">3</button>
+          <button class="rating">4</button>
+          <button class="rating">5</button>
+        </div>
+        <div class="submit-btn">
+          <button type="submit" class="submit">Submit</button>
+        </div>
+      </div>
+
+      <!-- Thank You Card -->
+      <div class="card thank-you-card hidden">
+        <img
+          src="./images/illustration-thank-you.svg"
+          alt="Thank You"
+          class="thank-you-img"
+        />
+        <div class="selected-rating">
+          You selected <span id="selected-rating-value"></span> out of 5
+        </div>
+        <div class="thank-title"><h1>Thank you!</h1></div>
+        <div class="thank-text">
+          <p>
+            We appreciate you taking the time to give a rating. If you ever need
+            more support, don’t hesitate to get in touch!
+          </p>
+        </div>
+      </div>
+    </div>
+    <script>
+      const ratingButtons = document.querySelectorAll(".rating");
+      const submitButton = document.querySelector(".submit");
+      const ratingCard = document.querySelector(".rating-card");
+      const thankYouCard = document.querySelector(".thank-you-card");
+      const selectedRatingValue = document.getElementById("selected-rating-value");
+    
+      let selectedRating = null;
+    
+      ratingButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          ratingButtons.forEach((btn) => btn.classList.remove("active"));
+          button.classList.add("active");
+          selectedRating = button.textContent;
+        });
+      });
+    
+      submitButton.addEventListener("click", () => {
+        if (selectedRating) {
+          selectedRatingValue.textContent = selectedRating;
+          ratingCard.classList.add("hidden");
+          thankYouCard.classList.remove("hidden");
+        } else {
+          alert("Please select a rating before submitting.");
+        }
+      });
+    </script>
+    
+  </body>
+</html>
